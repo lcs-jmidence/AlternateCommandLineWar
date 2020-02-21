@@ -45,7 +45,7 @@ class Hand {
     var topCard : Card? {
         
         // Return the top card, if there is at least one in the hand
-        if self.cards.count > 0 {
+        if self.cards.count >= 1 {
             return cards[0]
         } else {
             return nil
