@@ -22,10 +22,39 @@ class WarHand: Hand {
     
 }
 
+struct beggarThyNeighbour {
+    // Create the variables needed
+    var player : WarHand
+    var computer : WarHand
+    var deck : Deck
+    var potOfGold : Hand
+    // Initialize the created variables
+    init() {
+        // Make a deck of cards
+        deck = Deck()
+        // Initialize the different hands (the potOFGold is the hand in the middle)
+        player = WarHand(description: "Player")
+        computer = WarHand(description: "Computer")
+        // Deal to the player
+        if let playerNewCards = self.deck.randomlyDealOut(thisManyCards: 26) {
+            player.cards = playerNewCards
+        }
+        // Deal to the Computer
+        if let computerNewCards = self.deck.randomlyDealOut(thisManyCards: 26) {
+            computer.cards = computerNewCards
+        }
+        
+        potOfGold = Hand(description: "Cards In Middle")
+        // There are no cards in the middle to begin with
+        potOfGold.cards = []
+        
+        }
+    }
+
 
 // Create a new datatype to represent a game of war
 class War {
-
+    
     // Statistics for game
     var hands : Int = 0
     var playerWins : Int = 0
@@ -42,7 +71,7 @@ class War {
     
     // Whether to show extreme detail
     var debugMode : Bool
-
+    
     // Set up and simulate the game
     init(debugMode: Bool = false) {
         
@@ -53,7 +82,7 @@ class War {
         player = WarHand(description: "player")
         computer = WarHand(description: "computer")
         bounty = Hand(description: "bounty")
-
+        
         // Deal to the player
         if let newCards = self.deck.randomlyDealOut(thisManyCards: 26) {
             player.cards = newCards
@@ -69,7 +98,7 @@ class War {
         
         // Show extreme detail?
         self.debugMode = debugMode
-
+        
         // Play the game
         play()
         
@@ -82,7 +111,7 @@ class War {
         print("==========")
         print("Game start")
         print("==========")
-
+        
         // This loop will repeat until the player either loses or wins by having all or no cards
         while player.hasNotWon() {
             
@@ -103,20 +132,20 @@ class War {
             compareTopCards()
             
         }
-
+        
         // Show player's hand
         player.status(verbose: debugMode)
-
+        
         // Show computer's hand
         computer.status(verbose: debugMode)
-
+        
         // Determine who won in the end
         if player.cards.count == 0 {
             print("Computer wins (end of game)")
         } else {
             print("Player wins (end of game)")
         }
-
+        
         // Print game rseults
         report()
     }
@@ -156,7 +185,7 @@ class War {
             computer.cards.removeAll()
             player.cards.append(contentsOf: bounty.cards)
             bounty.cards.removeAll()
-                        
+            
         } else if computer.cards.count > player.cards.count {
             
             // Computer gets all cards, wins, game is over
@@ -164,7 +193,7 @@ class War {
             player.cards.removeAll()
             computer.cards.append(contentsOf: bounty.cards)
             bounty.cards.removeAll()
-
+            
         } else {
             
             // Special cases... when players have same number of cards
@@ -200,7 +229,7 @@ class War {
                     
                     // Clear the bounty
                     bounty.cards.removeAll()
-                                        
+                    
                 }
                 
             } else {
@@ -215,7 +244,7 @@ class War {
                 
                 // Compare the top card to see who wins
                 compareTopCards()
-
+                
             }
             
         }
@@ -230,7 +259,7 @@ class War {
         bounty.cards.append(player.dealTopCard()!)
         bounty.cards.append(computer.dealTopCard()!)
     }
-
+    
     // Compares the two top cards and takes action as needed
     func compareTopCards() {
         
@@ -256,23 +285,23 @@ class War {
             
             // Computer wins...
             print("Computer won, computer top card was \(computer.topCard!.simpleDescription()) and player top card was \(player.topCard!.simpleDescription()).")
-
+            
             // Add top cards to the bounty
             addTopCardsToBounty()
-
+            
             // Computer gets entire bounty
             computer.cards.append(contentsOf: bounty.cards.reversed())
             
             // Clear the bounty
             bounty.cards.removeAll()
-
+            
         } else {
             
             // Tie...
             
             // Cards that caused war go in the bounty
             addTopCardsToBounty()
-
+            
             // It's a war!
             aWarHappens()
         }
@@ -289,4 +318,4 @@ class War {
     }
 }
 
-War(debugMode: false)
+//War(debugMode: false)
