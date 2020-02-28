@@ -34,7 +34,7 @@ enum Suit : Int {
         return 4
     }
     
-    // Computed property to return glyph
+    // Computed property to return glyph.
     var glyph : String {
         switch self {
         case .spades:

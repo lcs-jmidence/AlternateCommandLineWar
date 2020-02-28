@@ -42,7 +42,7 @@ enum Rank : Int {
         return self.rank > otherRank.rank
     }
     
-    // Report the simple description of this rank
+    // Report the simple description of this rank.
     func simpleDescription() -> String {
        switch self {
        case .ace:

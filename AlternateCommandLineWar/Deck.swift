@@ -43,7 +43,7 @@ struct Deck {
 
     }
     
-    // Prints status of the deck
+    // Prints status of the deck.
     func status() {
         
         // Iterate over the deck of cards

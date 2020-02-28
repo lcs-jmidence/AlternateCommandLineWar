@@ -53,7 +53,7 @@ class Hand {
 
     }
     
-    // Remove the top card of this hand
+    // Remove the top card of this hand.
     func dealTopCard() -> Card? {
         
         // Deal a card, if there is at least one in the hand

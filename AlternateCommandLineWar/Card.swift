@@ -8,7 +8,7 @@
 
 import Foundation
 
-// Create a new datatype to represent a playing card
+// Create a new datatype to represent a playing card.
 struct Card {
 
     // Properties
